@@ -1,0 +1,54 @@
+﻿@using API_Notizapp_WebServer.Data;
+@using API_Notizapp_WebServer.Shared;
+@using System.Text.Json;
+@using System.Text;
+@page "/newnote"
+
+<PageTitle>New Note</PageTitle>
+<link href="/css/stylesheet.css" rel="stylesheet" />
+
+
+<h1>Add Note</h1>
+
+<div class="page">
+    <main>
+        <article class="content px-4">
+
+            <input @bind="notiz.title" type="text" placeholder="Titel" />
+            <br />
+            <textarea @bind="notiz.inhalt" type="text" placeholder="Inhalt" />
+            <br />
+            <button @onclick="createNotiz">Add Note</button>
+            <br />
+
+        </article>
+    </main>
+</div>
+
+
+@code {
+    private Notiz notiz = new Notiz();
+    List<Notiz> notizen = new List<Notiz>();
+
+    private void createNotiz()
+    {
+        notizen.Add(notiz);
+
+        HttpClient client = new HttpClient();
+
+
+        string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
+        var list = JsonSerializer.Deserialize<List<Notiz>>(data);
+
+        if (list != null)
+        {
+            var noteJson = JsonSerializer.Serialize(notiz);
+
+            var requestContent = new StringContent(noteJson, Encoding.UTF8, "application/json");
+            var response = client.PostAsync("http://localhost:4000/addNotiz", requestContent);
+        }
+
+        notiz.title = "";
+        notiz.inhalt = "";
+    }
+}

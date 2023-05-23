@@ -1,0 +1,81 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\API_Notizapp_WebServer.bundle.scp.css",
+      "PackagePath": "staticwebassets\\API_Notizapp_WebServer.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\open-iconic\\README.md",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\README.md"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\css\\stylesheet.css",
+      "PackagePath": "staticwebassets\\css\\stylesheet.css"
+    },
+    {
+      "Id": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.API_Notizapp_WebServer.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.API_Notizapp_WebServer.props",
+      "PackagePath": "build\\API_Notizapp_WebServer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.API_Notizapp_WebServer.props",
+      "PackagePath": "buildMultiTargeting\\API_Notizapp_WebServer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.API_Notizapp_WebServer.props",
+      "PackagePath": "buildTransitive\\API_Notizapp_WebServer.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

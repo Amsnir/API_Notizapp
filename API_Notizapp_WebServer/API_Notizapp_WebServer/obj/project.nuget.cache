@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "AVmi3WiL4whvvAzSRYACN7gHVuQTfZtowNKDDgWVXmG/RjaDCsgK5wdRHlKYTdlMso7zBcrCchjPyqzMmMPqMg==",
+  "success": true,
+  "projectFilePath": "C:\\Neuer Ordner\\0_NotizApp\\API_Notizapp_WebServer\\API_Notizapp_WebServer\\API_Notizapp_WebServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\iamir\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
