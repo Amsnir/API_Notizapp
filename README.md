@@ -28,15 +28,15 @@ D(MongoDB)
 ```
 
 
-##### API-Notizapp
+#### API-Notizapp
 
 Die API-Notizapp ist der wichtigste Teil des Projektes welche alle Daten mittels einer MongoDB-Datenbank speichert und verwaltet. Sie ist im Gegensatz zum Webbrowser und der WPF Anwendung als einzige in Java programmiert und basiert auf dem Spring Boot Framework.
 
-##### Blazor Webserver
+#### Blazor Webserver
 
 Ist eine einfach gestaltete Website mit der Benutzer ihre Notizen, welche von der API-Notizapp bereitgestellt werden, erstellen, bearbeiten oder löschen können. Die Website basiert auf das Webframework Blazor, dass auf ASP.NET aufgebaut ist. 
 
-##### WPF Anwendung
+#### WPF Anwendung
 
 Die WPF Anwendung dient wie der Webserver als Verwaltungsprogramm der gespeicherten Notizen. Auch hier, kann der Benutzer seine Notizen, die von der API-Notizapp zur Verfügung gestellt werden, erstellen, bearbeiten oder löschen.
 
@@ -64,7 +64,7 @@ Für die API wurden folgende Dependencies verwendet:
     </dependency></dependencies>
 ```
 
-##### Endpoints konfigurieren
+#### Endpoints konfigurieren
 
 Um mit Daten zu speichern, ändern oder zu löschen braucht man sogenannte Endpoints mit den speziellen Anforderungen. Diese muss man zuerst in der API konfigurieren:
 
@@ -187,9 +187,7 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
   
 
 > | data type      | type         | format                  | description                                                   |
-
 > |----------------|--------------|-------------------------|---------------------------------------------------------------|
-
 > | None          | -  | -   | N/A  |
 
   
@@ -200,9 +198,7 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
   
 
 > |content-type             | response example / description                                                                |
-
 > |-------------------------|-----------------------------------------------------------------------------------------------|
-
 > |`json string`       | `JSON Liste an Notizen`                                              |
 
   
@@ -220,10 +216,8 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
   
 
 > | data type      | type         | format                  | description                                                   |
-
 > |----------------|--------------|-------------------------|---------------------------------------------------------------|
-
-> | Serie          | Requestbody  | object (JSON or YAML)   | N/A  |
+> | Notiz          | Requestbody  | object (JSON or YAML)   | N/A  |
 
   
   
@@ -233,9 +227,7 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
   
 
 > |content-type             | response example / description                                                                |
-
 > |-------------------------|-----------------------------------------------------------------------------|
-
 > |`json string`       | `{"success":"true","message":"Notiz has been added successfully."}`                |
 
   
@@ -253,9 +245,7 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
   
 
 > | data type      | type         | format                  | description                                                   |
-
 > |----------------|--------------|-------------------------|---------------------------------------------------------------|
-
 > | String          | Path  | String   | {id} der gewünschten Notiz  |
 
   
@@ -266,9 +256,7 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
   
 
 > |content-type             | response example / description                                                                |
-
 > |-------------------------|-----------------------------------------------------------------------------------------------|
-
 > |`json string`       | `{"success":"true","message":"Notiz has been deleted successfully."}`                                              |
 
   
@@ -286,12 +274,9 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
   
 
 > | data type      | type         | format                  | description                                                   |
-
 > |----------------|--------------|-------------------------|---------------------------------------------------------------|
-
 > | String          | Path  | String   | {id} der gewünschten Notiz  |
-
-> | Driver | Requestbody | object (JSON or YAML) | N/A |  
+> | Notiz | Requestbody | object (JSON or YAML) | N/A |  
 
   
   
@@ -300,11 +285,9 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
 
   
 
-> |content-type             | response example / description                                                                |
-
-> |-----------------------|-------------------------------------------------------------------------------|
-
-> |`json string`              | `{"success":"true","message":"Notiz has been edited successfully."}`        |
+> |content-type             | response example / description                                                |
+> |-------------------------|-------------------------------------------------------------------------------|
+> |`json string`            | `{"success":"true","message":"Notiz has been edited successfully."}`          |
 
   
 
@@ -323,9 +306,7 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
   
 
 > | data type      | type         | format                  | description                                                   |
-
 > |----------------|--------------|-------------------------|---------------------------------------------------------------|
-
 > | None          | -  | -   | N/A  |
 
   
@@ -336,9 +317,7 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
   
 
 > |content-type             | response example / description                                                                |
-
 > |-------------------------|-----------------------------------------------------------------------------------------------|
-
 > |`json string`       | `{"success":"true","message":"Das Service ist verfügbar!"}`  |
 
   
