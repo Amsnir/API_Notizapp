@@ -1,17 +1,25 @@
+# Notizapp
+
 Im Rahmen des Faches Prgrammieren und Softwareentwicklung musste ein Projekt, dass sich auf das Thema der REST-APIs konzentriert. Ein wichtiger Aspekt des Projekts war die Erstellung von zwei Clients, die auf diese API zugreifen. Die beiden Clients wurden als eine WPF-Anwendung und eine Website umgesetzt.
 
 Das Projekt ist eine API, die eine einfache Notiz-App implementiert. Mit dieser sollte es möglich sein, Notizen die sich der Benutzer macht zu speichern und zugänglich zu machen.
 
+<br>
 
 ## Inhaltsverzeichnis
 
+- [Softwaredesign](#softwaredesign)
+- [Softwarebeschreibung](#softwarebeschreibung)
+- [API-Beschreibung](#api-beschreibung)
+- [Diagramme](#diagramme)
+- [Diskussion](#diskussion)
 
-
-
-
+<br>
+<br>
 
 
 ## Softwaredesign
+
 
 ```mermaid
 
@@ -27,6 +35,7 @@ D(MongoDB)
 
 ```
 
+<br>
 
 #### API-Notizapp
 
@@ -40,11 +49,12 @@ Ist eine einfach gestaltete Website mit der Benutzer ihre Notizen, welche von de
 
 Die WPF Anwendung dient wie der Webserver als Verwaltungsprogramm der gespeicherten Notizen. Auch hier, kann der Benutzer seine Notizen, die von der API-Notizapp zur Verfügung gestellt werden, erstellen, bearbeiten oder löschen.
 
-
+<br>
+<br>
 
 ## Softwarebeschreibung
 
-#### API-Noizapp
+#### API-Notizapp
 
 Für die API wurden folgende Dependencies verwendet:
 - spring-boot-starter-data-mongodb
@@ -64,6 +74,8 @@ Für die API wurden folgende Dependencies verwendet:
     </dependency></dependencies>
 ```
 
+<br>
+
 #### Endpoints konfigurieren
 
 Um mit Daten zu speichern, ändern oder zu löschen braucht man sogenannte Endpoints mit den speziellen Anforderungen. Diese muss man zuerst in der API konfigurieren:
@@ -73,8 +85,11 @@ Um mit Daten zu speichern, ändern oder zu löschen braucht man sogenannte Endpo
 public List<Notiz> getallInfo() {return notizService.getAll();}
 ```
 
+<br>
 Die Endpoints werden unter dem Punkt API Beschreibung näher erläutert.
 
+<br>
+<br>
 
 #### Blazor Webserver
 
@@ -94,11 +109,16 @@ protected override async Task OnInitializedAsync()
     }
 ```
 
+<br>
 Der Funktionsaufruf  ```OnInitializedAsync()``` ist ein Teil des Blazor Frameworks und wird bei der Initialisierung der Seite aufgerufen.
 
-Nun werden die Codeteile des Webservers worin die POST-/ PUT-/ DELETE-Requests enthalten sind gezeigt. Diese Funktionen ähneln sich mit den Funktionen der WPF Anwendung.
+<br>
+<br>
 
-POST-Funktion:
+Nun werden die Codeteile des Webservers worin die POST-/ PUT-/ DELETE-Requests enthalten sind gezeigt. Diese Funktionen ähneln sich mit den Funktionen der WPF Anwendung.
+<br>
+
+##### POST-Funktion
 ```c#
 private void createNotiz()
     {
@@ -125,8 +145,9 @@ private void createNotiz()
     }
 ```
 Hier wird eine neue Notiz erstellt und in die Liste der notizen, die man mittels GET-Request bekommt, gespeichert. Anschließend wird die Notiz in ein JSON-Objekt umgewandelt und per POST-Request an die API gesendet und in die MongoDB gespeichert.
+<br>
 
-PUT-Funktion:
+##### PUT-Funktion
 ```c#
 public void editNotiz()
     {
@@ -149,8 +170,9 @@ public void editNotiz()
     }
 ```
 Bei der PUT-Funktion wird wie bei der POST-Funktion die Notiz in ein JSON-Format umgewandelt und mittels PUT-Request and die API gesendet. Bei dem PUT-Request wird dabei die id mitgegeben, sodass die gewünschte Notiz durch die bearbeitete Notiz in der MongoDB ersetzt wird.
+<br>
 
-DELETE-Funktion:
+##### DELETE-Funktion
 ```c#
 public void DeleteNotes(Notiz n)
     {
@@ -168,11 +190,65 @@ public void DeleteNotes(Notiz n)
     }
 ```
 Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei wird wie bei dem PUT-Request die id mitgegeben, sodass die gewünschte Notiz in der MongoDB gelöscht wird.
+<br>
+<br>
+
+#### WPF Anwendung
+
+Die WPF Anwendung ähnelt den Funktionen des Blazor Webservers. Sie ist auch in C# implementiert und die Methoden des Newtonsoft Json.NET Nugets verwendet. In der Speicherung in die MongoDB besteht jedoch ein kleiner unterschied.
+
+Um die Daten zu holen wird nicht ``` JsonSerializer.Deserialize<List<Notiz>>(data);``` verwendet, da es aus unerklärlichen Gründen eine leere Liste zurückgibt. Dieses Problem trat aber nicht am Blalzor Webserver auf, deshalb wurde es wie schon vorher dokumentiert, anders implementiert.
+
+``` c#
+	HttpClient client = new HttpClient();
+
+	string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
+	notes = JsonConvert.DeserializeObject<List<Note>>(data);
+```
+
+<br>
+Das selbe Problem trat auch bei den POST- / PUT- / und DELETE-Requests auf.
+
+Die POST-/ und PUT-Methoden unterscheiden sich auch ein wenig zu den am Webserver. Hier wird die Notiz nicht wie am Webserver in ein json-Objekt umgewandelt, sondern ein neues json-Objekt mit den inhalt der Notiz erstellt und dem POST-/ und PUT-Request mitgesendet.
+Der Grund für diese Art der Speicherung war, dass es sonst, mit der Speicherart wie beim Webserver, einen Datenbank Eintrag mit nur ```null``` Werten eingefügt wurde.
+
+``` c#
+    List<Note> notes = new List<Note>();
+
+    JObject json = new JObject
+    {
+        { "title", titleBox.Text },
+        { "inhalt", inhaltBox.Text },
+    };
+
+    HttpClient client = new HttpClient();
+
+    string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
+    notes = JsonConvert.DeserializeObject<List<Note>>(data);
 
 
+    if (notes != null)
+    {
+        var requestContent = new StringContent(json.ToString(), Encoding.UTF8, 
+					         "application/json");
 
+        if (notes.Find(x => x.Id == note.Id) != null)
+        {
+            var response = client.PutAsync("http://localhost:4000/editNotiz/" + 
+				           note.Id, requestContent);
+        }
+        else
+        {
+            var response = client.PostAsync("http://localhost:4000/addNotiz", 
+				           requestContent);
+        }
+    }
+```
 
-## API Beschreibung
+<br>
+<br>
+
+## API-Beschreibung
 
 #### Notiz
 
@@ -285,9 +361,9 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
 
   
 
-> |content-type             | response example / description                                                |
-> |-------------------------|-------------------------------------------------------------------------------|
-> |`json string`            | `{"success":"true","message":"Notiz has been edited successfully."}`          |
+> |content-type             | response example / description                                                                |
+> |-----------------------|-------------------------------------------------------------------------------|
+> |`json string`              | `{"success":"true","message":"Notiz has been edited successfully."}`        |
 
   
 
@@ -324,5 +400,66 @@ Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei w
 
 </details>
 
+#### Datentypen der Notiz
 
-### Datentypen
+> | Datentyp | Name | Beschreibung | Required |
+> |----------------|--------------|-----------------------|--------------|
+> | String          | id  | uniqe, automatisch generiert   | no  |
+> | String          | title  | Titel der Notiz   | no  |
+> | LocalDate          | datum  | Erstell/Änderungsdatum   | no  |
+> | String          | inhalt  | Inhalt der Notiz   | no  |
+
+<br>
+<br>
+
+## Diagramme
+
+Das folgende UML-Klassendiagramm zeigt die Beziehungen und Eigenschaften der Datentypen, mit welchen die API-Notizapp arbeitet.
+
+```mermaid
+classDiagram
+
+	MongoRepository <|-- NotizRepository : extends
+NotizRepository "1" --* "1" NotizService : uses  
+NotizService "1" --* "1" NotizController : uses  
+Notiz "*" o-- "1" NotizService : has  
+
+class Notiz{  
+	+id : String
+	+titel : String
+	+datum : LocalDate
+	+inhalt : String
+}
+
+class NotizService{  
+	+addNotiz()  void
+	+deleteNotiz()  void
+    +editNotiz()  void
+    +getAll()  void 
+}
+
+class NotizController{  
+	+addNotiz()  String
+	+deleteNotiz()  String
+    +editNotiz()  String
+    +getallInfo()   List<Notiz>
+    +getStatus()   String
+} 
+
+class NotizRepository{  
+} 
+
+class MongoRepository{  
+}
+
+
+```
+
+<br>
+<br>
+
+## Diskussion
+
+Da Projektende resultiert in 3 seperate Programme der REST-API, der WPF Anwendung und der Webapp. Alle 3 bilden in zusammenarbeit ein einfaches Client-Server System, wobei die API der Server und die WPF und Webapp die Clients sind. DIe API ist eine einfache REST-API die Daten über Notizen speichert und verwaltet. Die Aufgabe der beiden Clients ist es, Notizen zu erstellen, bearbeiten und zu löschen und diese anschließend in die MongoDB über die API zu speichern.
+
+Die Erarbeitung des Projektes verlief recht holprig, da am Anfang des Projektes auf verschiedene Probleme stieß. Jedoch wurden diese entweder behoben oder es wurde ein neuer programmatischer Ansatz verwendet. Eine dieser Probleme war wie schon erwähnt die Speicherung der Daten in der WPF Anwendung, aber auch das fehlende know-how bezüglich der Blazor Webapp. Durch ausreichender Recherche im Internet waren diese Probleme schnell gelöst. Positive Eigenschaften am Projektverlauf war aufjedenfall das Wissen über WPF und Spring Boot, welches ich sowohl aus dem Unterricht als auch auch aus der Erarbeitung von verschiedenen Projekten in SYP mitnahm. Im Großen und Ganzen war es ein erfolgreiches Projekt, in welchem ich sehr viel dazugelernt habe.
