@@ -126,19 +126,9 @@ private void createNotiz()
 
         HttpClient client = new HttpClient();
 
-
-        string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
-        var list = JsonSerializer.Deserialize<List<Notiz>>(data);
-
-        if (list != null)
-        {
-            var noteJson = JsonSerializer.Serialize(notiz);
-
-            var requestContent = new StringContent(noteJson, Encoding.UTF8, 
-						             "application/json");
-            var response = client.PostAsync("http://localhost:4000/addNotiz", 
-						   requestContent);
-        }
+        var noteJson = JsonSerializer.Serialize(notiz);
+        var requestContent = new StringContent(noteJson, Encoding.UTF8, "application/json");
+        client.PostAsync("http://localhost:4000/addNotiz", requestContent);
 
         notiz.title = "";
         notiz.inhalt = "";
@@ -153,18 +143,10 @@ public void editNotiz()
     {
         HttpClient client = new HttpClient();
 
-        string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
-        var list = JsonSerializer.Deserialize<List<Notiz>>(data);
 
-
-        if (notiz != null && list != null)
-        {
-            var noteJson = JsonSerializer.Serialize(notiz);
-            var requestContent = new StringContent(noteJson, Encoding.UTF8, 
-						             "application/json");
-            var response = client.PutAsync("http://localhost:4000/editNotiz/" + 
-						   notiz.id, requestContent);
-        }
+        var noteJson = JsonSerializer.Serialize(notiz);
+        var requestContent = new StringContent(noteJson, Encoding.UTF8, "application/json");
+        client.PutAsync("http://localhost:4000/editNotiz/" + notiz.id, requestContent);
 
         edit = false;
     }
@@ -177,16 +159,7 @@ Bei der PUT-Funktion wird wie bei der POST-Funktion die Notiz in ein JSON-Format
 public void DeleteNotes(Notiz n)
     {
         HttpClient client = new HttpClient();
-
-        string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
-        var list = JsonSerializer.Deserialize<List<Notiz>>(data);
-
-
-        if (n != null && list != null)
-        {
-            var response = client.DeleteAsync("http://localhost:4000/deleteNotiz/" + 
-						   n.id);
-        }
+        client.DeleteAsync("http://localhost:4000/deleteNotiz/" + n.id);
     }
 ```
 Die DELETE-Funktion löscht mittels DELETE-Request die angegebene Notiz. Dabei wird wie bei dem PUT-Request die id mitgegeben, sodass die gewünschte Notiz in der MongoDB gelöscht wird.
@@ -217,8 +190,8 @@ Der Grund für diese Art der Speicherung war, dass es sonst, mit der Speicherart
 
     JObject json = new JObject
     {
-        { "title", titleBox.Text },
-        { "inhalt", inhaltBox.Text },
+            { "title", titleBox.Text },
+            { "inhalt", inhaltBox.Text },
     };
 
     HttpClient client = new HttpClient();
@@ -226,22 +199,15 @@ Der Grund für diese Art der Speicherung war, dass es sonst, mit der Speicherart
     string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
     notes = JsonConvert.DeserializeObject<List<Note>>(data);
 
+    var requestContent = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
 
-    if (notes != null)
+    if (notes.Find(x => x.Id == note.Id) != null)
     {
-        var requestContent = new StringContent(json.ToString(), Encoding.UTF8, 
-					         "application/json");
-
-        if (notes.Find(x => x.Id == note.Id) != null)
-        {
-            var response = client.PutAsync("http://localhost:4000/editNotiz/" + 
-				           note.Id, requestContent);
-        }
-        else
-        {
-            var response = client.PostAsync("http://localhost:4000/addNotiz", 
-				           requestContent);
-        }
+        client.PutAsync("http://localhost:4000/editNotiz/" + note.Id, requestContent);
+    }
+    else
+    {
+        client.PostAsync("http://localhost:4000/addNotiz", requestContent);
     }
 ```
 
