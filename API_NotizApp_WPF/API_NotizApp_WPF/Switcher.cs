@@ -17,6 +17,5 @@ namespace API_NotizApp_WPF
         {
             pageSwitcher.Navigate(newPage);
         }
-        
     }
 }

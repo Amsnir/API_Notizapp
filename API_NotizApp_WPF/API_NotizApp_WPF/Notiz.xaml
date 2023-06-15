@@ -21,7 +21,7 @@
             <TextBox Name="titleBox" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="210" Height="25" FontSize="14" Foreground="White" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderBrush="{x:Null}" Background="#FF5A5A5A" MaxLength="15"/>
         </Grid>
 
-        <TextBox Name="inhaltBox" Grid.Row="1" Background="Transparent" Padding="10" FontSize="14" Foreground="White" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderThickness="0,1,0,0" BorderBrush="{x:Null}"></TextBox>
+        <TextBox Name="inhaltBox" Grid.Row="1" Background="Transparent" Padding="10" FontSize="14" Foreground="White" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderThickness="0,1,0,0" BorderBrush="{x:Null}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"></TextBox>
     </Grid>
 
 </UserControl>

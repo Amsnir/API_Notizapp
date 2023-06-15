@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:API_NotizApp_WPF"
         mc:Ignorable="d"
-        Height="562" Width="1000" Background="#FF5A5A5A">
+        Height="562" Width="1000" Background="#FF5A5A5A" Icon="/3426.11-sticky-notes-icon-iconbunny.png">
 
     <Grid ShowGridLines="true">
         <Grid.ColumnDefinitions>

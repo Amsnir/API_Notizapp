@@ -72,19 +72,15 @@ namespace API_NotizApp_WPF
             notes = JsonConvert.DeserializeObject<List<Note>>(data);
 
 
-            if (notes != null)
+            var requestContent = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+
+            if (notes.Find(x => x.Id == note.Id) != null)
             {
-                var requestContent = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
-
-                if (notes.Find(x => x.Id == note.Id) != null)
-                {
-                    var response = client.PutAsync("http://localhost:4000/editNotiz/" + note.Id, requestContent);
-                }
-                else
-                {
-                    var response = client.PostAsync("http://localhost:4000/addNotiz", requestContent);
-                }
-
+                client.PutAsync("http://localhost:4000/editNotiz/" + note.Id, requestContent);
+            }
+            else
+            {
+                client.PostAsync("http://localhost:4000/addNotiz", requestContent);
             }
             
             menu2.buttons[menu2.notizen.IndexOf(this)].Content = note.Title;
@@ -95,22 +91,15 @@ namespace API_NotizApp_WPF
         {
             HttpClient client = new HttpClient();
 
-            string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
-            var list = JsonConvert.DeserializeObject<List<Note>>(data);
+            client.DeleteAsync("http://localhost:4000/deleteNotiz/" + note.Id);
 
+            menu2.grid.Children.Remove(menu2.buttons[menu2.notizen.IndexOf(this)]);
+            menu2.buttons.Remove(menu2.buttons[menu2.notizen.IndexOf(this)]);
+            menu2.notizen.Remove(this);
 
-            if (note != null && list != null)
-            {
-                var response = client.DeleteAsync("http://localhost:4000/deleteNotiz/" + note.Id);
-
-                menu2.grid.Children.Remove(menu2.buttons[menu2.notizen.IndexOf(this)]);
-                menu2.buttons.Remove(menu2.buttons[menu2.notizen.IndexOf(this)]);
-                menu2.notizen.Remove(this);
-
-                menu2.updateGrid();
+            menu2.updateGrid();
                 
-                Switcher.Switch(menu);
-            }
+            Switcher.Switch(menu);
         }
     }
 }

@@ -39,9 +39,9 @@ namespace API_NotizApp_WPF
 
 
             HttpClient client = new HttpClient();
-
             string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
             notes = JsonConvert.DeserializeObject<List<Note>>(data);
+
 
             if(notes != null)
             {

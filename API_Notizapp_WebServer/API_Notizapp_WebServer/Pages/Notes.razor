@@ -72,15 +72,7 @@
     public void DeleteNotes(Notiz n)
     {
         HttpClient client = new HttpClient();
-
-        string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
-        var list = JsonSerializer.Deserialize<List<Notiz>>(data);
-
-
-        if (n != null && list != null)
-        {
-            var response = client.DeleteAsync("http://localhost:4000/deleteNotiz/" + n.id);
-        }
+        client.DeleteAsync("http://localhost:4000/deleteNotiz/" + n.id);
     }
 
     public void onEditClick(Notiz n)
@@ -100,16 +92,10 @@
     {
         HttpClient client = new HttpClient();
 
-        string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
-        var list = JsonSerializer.Deserialize<List<Notiz>>(data);
 
-
-        if (notiz != null && list != null)
-        {
-            var noteJson = JsonSerializer.Serialize(notiz);
-            var requestContent = new StringContent(noteJson, Encoding.UTF8, "application/json");
-            var response = client.PutAsync("http://localhost:4000/editNotiz/" + notiz.id, requestContent);
-        }
+        var noteJson = JsonSerializer.Serialize(notiz);
+        var requestContent = new StringContent(noteJson, Encoding.UTF8, "application/json");
+        client.PutAsync("http://localhost:4000/editNotiz/" + notiz.id, requestContent);
 
         edit = false;
     }

@@ -8,8 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove=".jpg" />
+    <None Remove="3426.11-sticky-notes-icon-iconbunny.png" />
     <None Remove="NotizIcon_grau.jpg" />
-    <None Remove="NotizIcon_weiss.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,8 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="NotizIcon_grau.jpg" />
-    <Resource Include="NotizIcon_weiss.jpg" />
+    <Resource Include="3426.11-sticky-notes-icon-iconbunny.png" />
   </ItemGroup>
 
 </Project>

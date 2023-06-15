@@ -36,17 +36,9 @@
 
         HttpClient client = new HttpClient();
 
-
-        string data = client.GetStringAsync("http://localhost:4000/Notiz").Result;
-        var list = JsonSerializer.Deserialize<List<Notiz>>(data);
-
-        if (list != null)
-        {
-            var noteJson = JsonSerializer.Serialize(notiz);
-
-            var requestContent = new StringContent(noteJson, Encoding.UTF8, "application/json");
-            var response = client.PostAsync("http://localhost:4000/addNotiz", requestContent);
-        }
+        var noteJson = JsonSerializer.Serialize(notiz);
+        var requestContent = new StringContent(noteJson, Encoding.UTF8, "application/json");
+        client.PostAsync("http://localhost:4000/addNotiz", requestContent);
 
         notiz.title = "";
         notiz.inhalt = "";
